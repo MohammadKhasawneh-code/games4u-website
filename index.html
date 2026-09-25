@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games4U | Level Up Your Experience</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #070913;
+            --bg-card: #0e1324;
+            --bg-card-hover: #151c36;
+            --primary-red: #ea1d24;
+            --accent-yellow: #ffde17;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(234, 29, 36, 0.25);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Animated Glowing Orbs */
+        .ambient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.25;
+            animation: floatOrb 14s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            top: -10%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: var(--primary-red);
+        }
+
+        .orb-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: var(--accent-yellow);
+            animation-duration: 18s;
+            animation-delay: -3s;
+        }
+
+        .orb-3 {
+            top: 40%;
+            left: 30%;
+            width: 400px;
+            height: 400px;
+            background: #4f46e5;
+            opacity: 0.12;
+            animation-duration: 22s;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 80px) scale(1.1); }
+            100% { transform: translate(-40px, 50px) scale(0.95); }
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 12px 0;
+            background: rgba(7, 9, 19, 0.85);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: block;
+            text-decoration: none;
+        }
+
+        .header-logo-img {
+            height: 72px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .social-quick-btn {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+        }
+
+        .social-quick-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Hero Section & Grid Layout */
+        .hero {
+            padding: 30px 0 20px;
+            text-align: center;
+        }
+
+        .hero-logo-box {
+            margin-bottom: 25px;
+            display: inline-block;
+            padding: 22px 75px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 222, 23, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 25px rgba(255, 222, 23, 0.1);
+        }
+
+        .hero-logo-img {
+            height: 85px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* الحاوية الجديدة لتوزيع Vision والنص و Mission بجانب بعضها */
+        .hero-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            align-items: center;
+            gap: 25px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .hero-center-content {
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .hero-center-content h1 {
+            font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+            font-weight: 900;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .hero-center-content h1 span {
+            background: linear-gradient(135deg, var(--primary-red), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-center-content p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Vision & Mission Cards Styling (مكان المربعات في الأطراف) */
+        .vm-card {
+            background: rgba(14, 19, 36, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+
+        /* الشريط الجانبي الأصفر للرؤية (Vision) */
+        .vm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-yellow);
+            transition: var(--transition);
+        }
+
+        /* الشريط الجانبي الأحمر للمهمة (Mission) */
+        .vm-card.mission::before {
+            background: var(--primary-red);
+        }
+
+        .vm-card:hover {
+            transform: translateY(-5px);
+            background: rgba(21, 28, 54, 0.95);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 222, 23, 0.08);
+            border-color: rgba(255, 222, 23, 0.3);
+        }
+
+        .vm-card.mission:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(234, 29, 36, 0.15);
+            border-color: rgba(234, 29, 36, 0.35);
+        }
+
+        .vm-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .vm-icon {
+            font-size: 1.2rem;
+            color: var(--accent-yellow);
+        }
+
+        .vm-card.mission .vm-icon {
+            color: var(--primary-red);
+        }
+
+        .vm-title {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .vm-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* توافق الكلاسات القديمة احتياطياً */
+        .vision-box, .mission-box {
+            background: rgba(14, 19, 36, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .vision-box::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-yellow); }
+        .mission-box::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary-red); }
+
+        /* --- Clients Ticker Section (شريط العملاء المتحرك) --- */
+        .clients-ticker-section {
+            padding: 25px 0 35px;
+            overflow: hidden;
+        }
+
+        .clients-ticker-header {
+            text-align: center;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ticker-wrapper {
+            background: rgba(14, 19, 36, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 30px 0;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .ticker-wrapper::before,
+        .ticker-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 80px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .ticker-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(14, 19, 36, 1), rgba(14, 19, 36, 0));
+        }
+        .ticker-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(14, 19, 36, 1), rgba(14, 19, 36, 0));
+        }
+
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            animation: scrollTicker 30s linear infinite;
+        }
+
+        .ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 40px;
+            height: 80px;
+        }
+
+        .ticker-item img {
+            max-height: 65px;
+            width: auto;
+            object-fit: contain;
+            opacity: 1;
+            transition: var(--transition);
+        }
+
+        .ticker-item img:hover {
+            transform: scale(1.08);
+        }
+
+        @keyframes scrollTicker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Filter Tabs */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0 35px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(14, 19, 36, 0.85);
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+            box-shadow: 0 5px 20px rgba(234, 29, 36, 0.4);
+        }
+
+        /* Games Grid - 4 Columns Layout */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding-bottom: 60px;
+        }
+
+        .game-card {
+            background: rgba(14, 19, 36, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-red);
+            box-shadow: 0 15px 30px rgba(234, 29, 36, 0.2), 0 0 15px rgba(234, 29, 36, 0.08);
+            background: rgba(21, 28, 54, 0.95);
+        }
+
+        .game-img-wrapper {
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+            background: #111;
+        }
+
+        .game-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .game-card:hover .game-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .game-content {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .game-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .game-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 12px;
+        }
+
+        .meta-tag {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .meta-tag i {
+            color: var(--accent-yellow);
+        }
+
+        .details-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--primary-red);
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            letter-spacing: 0.5px;
+        }
+
+        .details-btn:hover {
+            background: var(--primary-red);
+            box-shadow: 0 4px 12px rgba(234, 29, 36, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(3, 4, 8, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media(max-width: 1200px) {
+            .games-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media(max-width: 992px) {
+            .hero-layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 900px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-logo-img {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Background Lighting Orbs -->
+    <div class="ambient-background">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-content">
+            <a href="#" class="brand-logo">
+                <img src="C:\Users\mkhaswneh\Desktop\Games4U\Games4U.png" alt="Games4U Logo" class="header-logo-img">
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=966550660206&text=Hello%20Games4U,%20I%20want%20to%20inquire%20about%20your%20attractions" target="_blank" class="social-quick-btn">
+                <i class="fab fa-whatsapp"></i> Book via WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+        <!-- شعار Hero -->
+        <div class="hero-logo-box">
+            <img src="C:\Users\mkhaswneh\Desktop\Games4U\Games4U.png" alt="Games 4U Logo" class="hero-logo-img">
+        </div>
+
+        <!-- حاوية تجمع Vision والوصف و Mission بجانب بعضها -->
+        <div class="hero-layout-grid">
+            <!-- Vision Box -->
+            <div class="vm-card">
+                <div class="vm-header">
+                    <i class="fas fa-eye vm-icon"></i>
+                    <h3 class="vm-title">Our Vision</h3>
+                </div>
+                <p class="vm-desc">To become the leading provider of innovative entertainment and event activation solutions across the Middle East by delivering world-class experiences that inspire, engage, and create unforgettable memories.</p>
+            </div>
+
+            <!-- النص الوسطي الأساسي -->
+            <div class="hero-center-content">
+                <h1>LEVEL UP YOUR <span>EXPERIENCE</span></h1>
+                <p>At Games4U, we specialize in designing, supplying, and operating world-class attractions for festivals, fan zones, corporate events, and family entertainment destinations across Saudi Arabia.</p>
+            </div>
+
+            <!-- Mission Box -->
+            <div class="vm-card mission">
+                <div class="vm-header">
+                    <i class="fas fa-bullseye vm-icon"></i>
+                    <h3 class="vm-title">Our Mission</h3>
+                </div>
+                <p class="vm-desc">Our mission is to transform every event into a unique experience by delivering innovative entertainment concepts, interactive attractions, and turnkey event solutions with highest quality standards.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Our Clients Ticker Section (شريط العملاء المتحرك) -->
+    <section class="clients-ticker-section">
+        <div class="container">
+            <div class="clients-ticker-header">
+                <i class="fas fa-handshake" style="color: var(--accent-yellow);"></i> Our Clients
+            </div>
+            <div class="ticker-wrapper">
+            <div class="ticker-track">
+    <!-- المجموعة الأولى (كامل البراندات من 1 إلى 24) -->
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\Goody.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\SAB.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\NIVEA.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\SABIC.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\KPMG.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\STC.png" alt="STC"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\Ministry.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\Saudi.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\TopEX.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\MinistryHealth.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\ARDARA.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\lika.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\Amanah.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\SAL.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\srmo.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\mtsu.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\family.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\american.png" alt="American Express"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\baker.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\nahdi.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\aramco.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\h.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\maaden.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\move.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\tamara.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\cat.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\slman.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\plaza.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\guard.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\tabby.png" alt="Tabby"></div>
+
+    <!-- النسخة المطبقة تماماً (تكرار نفس الـ 30 شعاراً للأعلى لضمان استمرارية الـ Loop بدون فراغ) -->
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\Goody.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\SAB.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\NIVEA.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\SABIC.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\KPMG.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\STC.png" alt="STC"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\Ministry.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\Saudi.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\TopEX.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\MinistryHealth.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\ARDARA.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\lika.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\Amanah.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\SAL.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\srmo.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\mtsu.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\family.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\american.png" alt="American Express"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\baker.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\nahdi.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\aramco.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\h.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Devices\games4u\maaden.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\move.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\tamara.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\cat.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\slman.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\plaza.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\guard.png" alt="Client"></div>
+    <div class="ticker-item"><img src="C:\Users\mkhaswneh\Desktop\Games4U\tabby.png" alt="Tabby"></div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content / Games Catalog -->
+    <main class="container">
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterGames('all', event)">All Attractions</button>
+            <button class="filter-btn" onclick="filterGames('tech', event)">Tech & AI</button>
+            <button class="filter-btn" onclick="filterGames('inflatable', event)">Inflatables & Sports</button>
+            <button class="filter-btn" onclick="filterGames('carnival', event)">Carnival Games</button>
+        </div>
+
+        <div class="games-grid" id="gamesGrid">
+            
+            <!-- 1. Advanced Laser Tag -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="https://www.xtremecraze.us/wp-content/uploads/2024/03/Lasertag-600-Num4.jpg" alt="Advanced Laser Tag">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Advanced Laser Tag</h3>
+                    <p class="game-desc">Exciting team-based game using safe infrared laser technology, laser blasters, and sensors to score points by completing mission objectives.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2-10 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 10-20 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Advanced%20Laser%20Tag" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 2. Robotic Goal Keeper -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="https://2.bp.blogspot.com/-sbIpAm3sSu0/WJFzEnQ0fcI/AAAAAAAAADA/Iq9pwsA5A3gWSzAGhSncWxK_NYRQEFPoQCLcB/s1600/robokeeper_neutral-1030x544.jpg" alt="Robotic Goal Keeper">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Robotic Goal Keeper</h3>
+                    <p class="game-desc">Most advanced and intelligent AI robot goal keeper in KSA. Features instant speed and trajectory display for professional soccer training or entertainment.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> Single / Multiplayer</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> All Ages</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> Interactive</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Robotic%20Goal%20Keeper" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 3. Inflatable Street Curling -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://streetcurling.com/wp-content/uploads/2021/07/Express-BKCC-Cleaned-BG-01-scaled-e1626459469902.jpg" alt="Inflatable Street Curling">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Inflatable Street Curling</h3>
+                    <p class="game-desc">A portable version of the Olympic curling sport where players slide stones along a special lane to hit the target center. Perfect for indoors & outdoors.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> All Ages</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 2-5 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Inflatable%20Street%20Curling" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 4. Interactive Strike Wall -->
+            <div class="game-card" data-category="carnival">
+                <div class="game-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80" alt="Interactive Strike Wall">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Interactive Strike Wall</h3>
+                    <p class="game-desc">An engaging interactive reaction game where players click glowing targets against the clock to test speed, reflexes, and coordination.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1-4 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> All Ages</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 3-5 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Interactive%20Strike%20Wall" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+  
+    
+     
+   
+            <!-- 4. Luxury Carnival Game -->
+            <div class="game-card" data-category="carnival">
+                <div class="game-img-wrapper">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.qbrumOu1A9of-4xebIgHQwHaEN?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Luxury Carnival Game">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Luxury Carnival Game</h3>
+                    <p class="game-desc">Multi-station classic skill-based carnival attraction featuring ring toss, knockout challenges, target games, bright LED lighting, and winning prizes.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> Single / Multi-turn</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> All Ages</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 1-3 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Luxury%20Carnival%20Game" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 5. Iron Carnival Game -->
+            <div class="game-card" data-category="carnival">
+                <div class="game-img-wrapper">
+                    <img src="https://c8.alamy.com/comp/AA81W6/water-racer-carnival-game-revelers-compete-to-win-prizes-by-shooting-AA81W6.jpg" alt="Iron Carnival Game">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Iron Carnival Game</h3>
+                    <p class="game-desc">Customized carnival attraction theme based on customer identity and bright LED lighting, serving as a major attraction for malls and festivals.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> Single / Multiple</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> All Ages</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 1-3 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Iron%20Carnival%20Game" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 6. Giant Soccer Dart -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.T1_ZLihNyMLCJ2uXTF2EoAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giant Soccer Dart">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Giant Soccer Dart</h3>
+                    <p class="game-desc">Combines football and darts into one interactive game. Players kick specially designed balls toward a giant inflatable dartboard.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> Individual / Team</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 5+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 2-5 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Giant%20Soccer%20Dart" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 7. Giant Human Foosball -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://interactiveparty.com/wp-content/uploads/2021/11/209-1024x768.jpeg" alt="Giant Human Foosball">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Giant Human Foosball</h3>
+                    <p class="game-desc">Life-sized foosball table game where participants become actual foosball figures holding horizontal poles, moving sideways together.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 6-12 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 5-10 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Giant%20Human%20Foosball" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 8. Giant Hunger Ball -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://th.bing.com/th/id/R.249226b7508b4a1b528773a7c9d973b6?rik=5YbE%2bMu6fBwEyQ&riu=http%3a%2f%2fwww.jugglepro.com%2fcdn%2fshop%2farticles%2fhungerball_1024x1024.jpg%3fv%3d1619064536&ehk=JnkdxX4nQ%2fHL2AyHM1Vx9njhWA7InlaCjdyYZgvBocQ%3d&risl=&pid=ImgRaw&r=0" alt="Giant Hunger Ball">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Giant Hunger Ball</h3>
+                    <p class="game-desc">Exciting inflatable arena where participants compete in a variety of team-based games using safe foam balls.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 6-12 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 10-15 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Giant%20Hunger%20Ball" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 9. Giant Target Speed Toss -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.6nvDNdF5CPEijLD1nXmFRgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giant Target Speed Toss">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Giant Target Speed Toss</h3>
+                    <p class="game-desc">Interactive target game where players throw soft balls at illuminated targets on a large game wall with changing target patterns.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1-4 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 1-2 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Giant%20Target%20Speed%20TOSS" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+            <!-- 10. Rocket League Challenge -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="https://pictures-uganda.jijistatic.com/28340760_MTYwMC0xNTY3LWIwMDg0NzQ1NGMtMQ.webp" alt="Rocket League Challenge">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Rocket League Challenge</h3>
+                    <p class="game-desc">Interactive game where players remotely control cars inside a miniature football field to push the ball and score goals.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2-4 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 3-5 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+
+ <!-- 11. Sub Soccer Table -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQA87NJt5V9PKOuDP5BXfP9Y6mQljl4LrlQ7ZDy3jkWw&s=10" alt="Sub Soccer Table">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Sub Soccer Table</h3>
+                    <p class="game-desc">interactive football-themed attraction 
+inspired by classic foosball. Players control the ball through 
+skill-based gameplay and challenges, aiming to score goals and achieve the highest score.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2-4 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 5+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 2-5 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 12. Jumping Challenge -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1K6uvEa7m-oo5uS3tqAg7JTK3BojPjF-cBNr6ggNYamEk-H9-mYHzhdb9&s=10" alt="Sub Soccer Table">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Jumping Challenge</h3>
+                    <p class="game-desc">interactive attraction designed to 
+test players' vertical jumping ability and athletic performance. 
+Players jump as high as possible to touch a suspended ball or 
+target, with their score determined by the highest level reached.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> Multi Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 30 seconds to 2 minutes per round </span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+
+<!-- 13. LED Foosball Table -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuOtTT9ZnDMTtNZwwz0P3uVo9iAN8HZ0hHsCDOZkFWLz3bTOpYoxLyqR7E&s=10" alt="Sub Soccer Table">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">LED Foosball Table</h3>
+                    <p class="game-desc"> a classic competitive football game where 
+players control miniature football figures using side rods to score goals against their opponents. This modern version 
+features LED lighting and an attractive design, making it a great addition to entertainment centers and gaming venues.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 6+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 3-10 minutes per match</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 14. BLENDER BIKE -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="https://wavecrestcafe.com/wp-content/uploads/2018/12/BlenderBike_CoverImage.jpg" alt="Sub Soccer Table">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">BLENDER BIKE</h3>
+                    <p class="game-desc">Experience the physical benefits of cycling while 
+enjoying a refreshing smoothie with our smoothie blender aluminum bike, designed for both fitness and fun.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2-4 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 5+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 2-5 min</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 15. Reaction Speed Challenge -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPLjZh3RqwqDofzmkGgJpsasuGR7s1aBw0hAO40S-8vO-_BcFbH1jwrOk&s=10" alt="Sub Soccer Table">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Reaction Speed Challenge</h3>
+                    <p class="game-desc">Reaction speed game where illuminated buttons and displays 
+light up randomly on the tabletop. Players must hit the correct 
+targets as quickly as possible to score points.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 4 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> All Ages</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 30 Seconds</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 16. Reaction Tube Challenge -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\CaptureReaction Tube Challenge.png" alt="Reaction Tube Challenge">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Reaction Tube Challenge</h3>
+                    <p class="game-desc">Reaction Tube is an interactive arcade game featuring illuminated LED tubes and responsive buttons. Players must 
+react quickly to changing light patterns, follow game sequences, and complete challenges within a limited time to achieve the highest score.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 6+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> : 1-2 minutes per round</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 17. Batek Pro Challenge -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Batek Pro Challenge.png" alt="Batek Pro Challenge">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Batek Pro Challenge</h3>
+                    <p class="game-desc">Batek Pro is an interactive reflex and speed game where illuminated targets light up randomly across the frame. 
+Players must touch the lit targets as quickly as possible before the next one appears. Scores and timing are displayed on the digital screen in the center.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1-2 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 6+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 30–120 seconds per round</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 18. 360 Dome Experience-->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\360 Dome Experience.png" alt="360 Dome Experience">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">360 Dome Experience</h3>
+                    <p class="game-desc">Step into an immersive 360° dome theater and enjoy captivating educational and entertainment films projected all 
+around you. A unique visual experience ideal for festivals, exhibitions, schools, and family events.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i>  20 players per session</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 5+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 15–20 minutes per round</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 19. F1 Racing Simulator -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\F1 Racing Simulator.png" alt="F1 Racing Simulator">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">F1 Racing Simulator</h3>
+                    <p class="game-desc">Experience the thrill of realistic racing with a professional 
+simulator featuring a racing wheel, pedals, and a highdefinition display, delivering an exciting and immersive driving experience.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i>  1 Player per simulator</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 10+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 5 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 20. SIMULATOR BIKE -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\SIMULATOR BIKE.png" alt="SIMULATOR BIKE">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">SIMULATOR BIKE</h3>
+                    <p class="game-desc">DESCRIPTION/ INSTRUCTION:
+Bike simulator is an innovative and technologically advanced event tool. With our bike simulator your event will surely be a success, as they 
+provide real competitive challenges for the users and a totally unique experience. The software is fully customizable as well as the structure.</p>
+                  
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 21. Interactive floor projector -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Interactive floor projector.png" alt="Interactive floor projector">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Interactive floor projector</h3>
+                    <p class="game-desc">Interactive floor projector is a digital attraction that uses advanced projection mapping technology to create interactive 
+games and animations directly on the floor. Players interact with the projected content by walking, running, jumping, or stepping on virtual objects.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1-6 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 4+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 3-5 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 22. Interactive motion wall -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Interactive motion wall.png" alt="Interactive motion wall">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Interactive motion wall</h3>
+                    <p class="game-desc">Interactive motion wall an immersive digital experience that transforms a wall into an interactive gaming surface using 
+projection technology. Participants engage with motion-based games and educational activities through movement and touch. Ideal for family events, festivals, and children's entertainment.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1-6 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 4+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 3-5 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 23. Archery Tag Battle -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Archery Tag Battle.png" alt="Archery Tag Battle">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Archery Tag Battle</h3>
+                    <p class="game-desc">An exciting team-based activity that combines archery and 
+action. Players compete using safe foam-tipped arrows inside a specially designed arena with inflatable obstacles. Perfect for team building, festivals, and sports events. </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i>  6–10 players per game (3 vs 3 up to 5 vs 5)
+</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 10+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 10-15 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 24. Archery Range -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Archery Range.png" alt="Archery Range">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Archery Range</h3>
+                    <p class="game-desc">An exciting team-based activity that combines archery and 
+action. Players compete using safe foam-tipped arrows inside a specially designed arena with inflatable obstacles. Perfect for team building, festivals, and sports events. </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 6–10 players per game (3 vs 3 up to 5 vs 5)</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 10+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 10-15 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 25. Bumper Ball Fight -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Group Games.png" alt="Bumper Ball Fight">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Bumper Ball Fight</h3>
+                    <p class="game-desc">Whether with friends, family, or corporate teams — we create 
+high-energy environments that promote physical activity, engagement, and teamwork through varieties</p>
+                     
+<div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i>  1–10 players per session</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 10-15 minutes per round</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 26. Inflatable Water Volleyball Court -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Inflatable Water Volleyball Court.png" alt="Inflatable Water Volleyball Court">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Inflatable Water Volleyball Court</h3>
+                    <p class="game-desc">Enjoy an exciting and refreshing volleyball experience on an 
+inflatable water court designed for safe and fun gameplay. Perfect for summer festivals, family events, and outdoor entertainment.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i>  4–8 players (2 vs 2 or 4 vs 4)</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 5-10 minutes per roound</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 27. Arm Wrestling-->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Arm Wrestling.png" alt="Arm Wrestling">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Arm Wrestling</h3>
+                    <p class="game-desc">Arm Wrestling is a highly specialized piece of equipment 
+designed to ensure fair competition, accurate victory declarations, and maximum athlete safety. Standard tables 
+are built using a durable steel frame topped with industrial wood, high-density EVA foam padding, and a non-slip PVC synthetic leather finish.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2 Players per game</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 12+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 2-3 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 28. Sumo Challenge -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Sumo Challenge.png" alt="Interactive floor projector">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Sumo Challenge</h3>
+                    <p class="game-desc">Sumo Challenge is a sporty game that lets you simulate a 
+sumo fight. The set includes two sumo suits, two helmets and a mat.</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 8+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 3-5 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 29. Bull Rider -->
+            <div class="game-card" data-category="Luxury Carnival Game">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Bull Rider.png" alt="Bull Rider">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Bull Rider</h3>
+                    <p class="game-desc">An electric or mechanical bull is a machine that copies the bucking motion of a rodeo bull. It uses a variable-speed electric 
+motor, a padded inflatable safety floor, and an operator console to give riders a safe test of balance</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1 vs 1 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 12+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 2-3 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 30. Reaction Ring -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Reaction Ring.png" alt="Reaction Ring ">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Reaction Ring </h3>
+                    <p class="game-desc">Reaction Ring Challenge Station is an interactive reflex game designed to test players’ reaction speed and concentration. 
+Targets or buttons light up randomly, and players must hit the illuminated target as quickly as possible before it changes. </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1 Player</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 6+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 30 Seconds</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 31. Super Hoop Ball -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Super Hoop Ball.png" alt="Super Hoop Ball ">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Super Hoop Ball </h3>
+                    <p class="game-desc">Super Hoop Ball is a popular electronic basketball game used in arcades and entertainment centers.
+The objective of the game is to score as many points as possible by shooting the balls into the hoop within the time limit displayed on the screen</p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1 Player</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 6+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 1-2 Minutes per game</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 32. Boxing Machine -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Boxing Machine.png" alt="Boxing Machine ">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Boxing Machine </h3>
+                    <p class="game-desc">This is an electronic boxing machine, usually placed in entertainment centers, gyms, or cafes, that measures the 
+force of the punches delivered by the player to the attached punching bag. </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1 Player</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 12+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 1 minutes per game</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 33. Claw Machine -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Claw Machine.png" alt="Claw Machine ">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Claw Machine </h3>
+                    <p class="game-desc">The player uses a joystick to move a lever inside the glass box 
+to retrieve a prize (such as a doll, ball, or small toy) and drop it into the prize slot (Prize Out). </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1 Player</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 4+</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 1 Second</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 34. Interactive Touch Table -->
+            <div class="game-card" data-category="tech">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Interactive Touch Table.png" alt="Interactive Touch Table ">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Interactive Touch Table </h3>
+                    <p class="game-desc">An engaging educational and entertainment experience where children interact with a variety of digital games and activities through a touchscreen table. The games 
+encourage logical thinking, concentration, quick reactions, and problem-solving while providing a fun and interactive learning environment. </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1-4 Player</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 3 - 12</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 5 - 10 minutes per game</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+<!-- 35. Soft Play area -->
+            <div class="game-card" data-category="inflatable">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Soft Play area.png" alt="Soft Play area ">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Soft Play area </h3>
+                    <p class="game-desc">A kids soft play area is an indoor, cushioned space designed for young children. It features foam blocks, ball 
+pits, and slides covered in soft vinyl. This environment lets kids climb and crawl safely without hard falls. </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 2 - 9 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 3 - 7</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 15 - 20 minutes per game</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 36. Lego Workshop -->
+            <div class="game-card" data-category="carnival">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Lego Workshop.png" alt="Lego Workshop ">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Lego Workshop</h3>
+                    <p class="game-desc">Lego workshop workshops designed to enhance 
+children's creativity, problem-solving abilities, and teamwork skills. Through engaging activities and engineering challenges, 
+children develop logical thinking, innovation, self-confidence, and communication skills in a fun and educational environment.  </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1 - 6 Player</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 2 - 7</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 3-5 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 37. Sand Workshop -->
+            <div class="game-card" data-category="carnival">
+                <div class="game-img-wrapper">
+                    <img src="C:\Users\mkhaswneh\Desktop\Games4U\Sand Workshop.png" alt="Sand Workshop ">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Sand Workshop </h3>
+                    <p class="game-desc">Sand Play workshop is a fun and interactive workshop 
+where children explore, create, and build using sand. Through hands-on activities, children develop creativity, sensory awareness, and fine motor skills while enjoying 
+an engaging learning experience. The workshop encourages imagination, exploration, and collaborative play in a safe and enjoyable environment </p>
+                    <div class="game-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 1 - 8 Players</span>
+                        <span class="meta-tag"><i class="fas fa-child"></i> Age 2 - 10</span>
+                        <span class="meta-tag"><i class="fas fa-clock"></i> 5-30 minutes per session</span>
+                    </div>
+                    <a href="https://wa.me/966550660206?text=I%20want%20to%20book%20Rocket%20League%20Challenge" target="_blank" class="details-btn">Book Attraction</a>
+                </div>
+            </div>
+
+
+<!-- 000000000000000000000000000000000000000000000000-->
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Games4U. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+
+<!-- JavaScript for Filtering -->
+    <script>
+        function filterGames(category, event) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.urlencoded ? [] : document.querySelectorAll('.game-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
